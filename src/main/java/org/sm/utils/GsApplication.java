@@ -12,7 +12,7 @@ import java.util.List;
 public class GsApplication {
     List<Man> allman=null;
     List<Woman>  allwoman=null;
-    static String filePath="D:\\wmmatch.txt";
+    static String filePath="D:\\zuoye\\SM\\wmmatch.txt";
     List<String> txtList=null;
     //Initialize the preference list
     public void init(){
