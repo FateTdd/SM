@@ -19,7 +19,7 @@ public class GsApplication {
         txtList=new ArrayList<String>();
         File file = new File(filePath);
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "GBK"));//构造一个BufferedReader类来读取文件
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "GBK"));//Construct a BufferedReader class to read the file
             String s = null;
             while ((s = br.readLine()) != null) {//Read one line at a time using the readLine method
                 txtList.add(s);
@@ -164,7 +164,7 @@ public class GsApplication {
                 break;
             }
         }
-        gsApplication.init();//初始化偏好
+        gsApplication.init();
         CheckUtil.hasBlockMatch(gsApplication.allman);
         for(Man man:gsApplication.allman){
             System.out.println(man.getName()+"===========Marry=========="+man.getPartner().getName());

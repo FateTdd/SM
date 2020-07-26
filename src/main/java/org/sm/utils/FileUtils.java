@@ -19,7 +19,7 @@ public class FileUtils {
 //    static int manNum;
 //    static int womanNum=6;
 //    static int womanNum;
-    static String filePath="D:\\wmmatch.txt";//TXT file address.
+    static String filePath="D:\\zuoye\\SM\\wmmatch.txt";//TXT file address.D:\zuoye\SM
 
 //    public static int getManNum(int i){
 //            int manNum = i;
@@ -82,9 +82,9 @@ public class FileUtils {
             // Receive integer
             System.out.println("The number of men and women is：" + n);
         } else {
-            // 输入错误的信息
             System.out.println("Please enter an integer!");
         }
+        System.out.println("The preference list for men and women will be randomly generated.");
 //        getManNum(i);
 //        getWomanNuma(i);
         createTxt(n);

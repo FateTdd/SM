@@ -21,7 +21,7 @@ public class EgsApplication {
 //    Woman[] allwoman=new Woman[]{woman1,woman2,woman3,woman4};
     List<Man> allman=null;
     List<Woman>  allwoman=null;
-    static String filePath="D:\\wmmatch.txt";
+    static String filePath="D:\\zuoye\\SM\\wmmatch.txt";
     List<String> txtList=null;
     //Initialize the preference list
     public void init(){
