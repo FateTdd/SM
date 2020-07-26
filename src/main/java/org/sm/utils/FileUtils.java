@@ -76,17 +76,29 @@ public class FileUtils {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter the number of people：");
         int n = 0;
-        if (scan.hasNextInt()) {
-            // Determine whether the input is an integer
-            n = scan.nextInt();
-            // Receive integer
-            System.out.println("The number of men and women is：" + n);
-        } else {
-            System.out.println("Please enter an integer!");
+//        if (scan.hasNextInt()) {
+//            // Determine whether the input is an integer
+//            n = scan.nextInt();
+//            // Receive integer
+//            System.out.println("The number of men and women is：" + n);
+//        } else {
+//            System.out.println("Please enter an integer!");
+//        }
+//        System.out.println("The preference list for men and women will be randomly generated.");
+        while(true) {
+            try {
+                n = scan.nextInt();			//If the input is not an integer, an InputMismatchException will be thrown.
+                break;								//If it is an integer, exit the while loop.
+            }catch(Exception e) {				//This Exception is caught with an Exception.
+                System.out.println("What you entered is not an integer, please continue to enter an integer!");
+                scan.next();
+            }
         }
+        System.out.println("The number of men and women is："+n);
         System.out.println("The preference list for men and women will be randomly generated.");
-//        getManNum(i);
-//        getWomanNuma(i);
+
+//        getManNum(n);
+//        getWomanNuma(n);
         createTxt(n);
     }
 }
