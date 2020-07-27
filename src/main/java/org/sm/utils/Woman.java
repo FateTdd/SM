@@ -5,15 +5,15 @@ public class Woman {
     private Man[] preferMan;//Preference array
     private Man partner;
     private int  code;
-    private int sex=1;//0 for male and 1 for female.
-
-    public int getSex() {
-        return sex;
-    }
-
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
+//    private int sex=1;//0 for male and 1 for female.
+//
+//    public int getSex() {
+//        return sex;
+//    }
+//
+//    public void setSex(int sex) {
+//        this.sex = sex;
+//    }
 
     public Woman(int code){
         this.code=code;

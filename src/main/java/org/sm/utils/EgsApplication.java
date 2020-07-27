@@ -2,12 +2,8 @@ package org.sm.utils;
 
 import org.springframework.util.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class EgsApplication {
     //    Woman woman1=new Woman(1);
@@ -21,10 +17,11 @@ public class EgsApplication {
 //    Woman[] allwoman=new Woman[]{woman1,woman2,woman3,woman4};
     List<Man> allman=null;
     List<Woman>  allwoman=null;
-    static String filePath="D:\\zuoye\\SM\\wmmatch.txt";
+    static String filePath="D:\\zuoye\\SM\\wmmatch.txt";//File address.
     List<String> txtList=null;
     //Initialize the preference list
-    public void init(){
+    public void ReadFile(){
+        //Obtain the male list and female list from the TXT file.
         txtList=new ArrayList<String>();
         File file = new File(filePath);
         try {
@@ -39,10 +36,10 @@ public class EgsApplication {
         }
         List<Man> manList=null;
         List<Woman> womanList=null;
-        if(allman==null){
+        if(allman==null){ //If the list is empty, add a man or woman to the list.
             manList=new ArrayList<Man>();
             womanList=new ArrayList<Woman>();
-            int manSize=Integer.valueOf(StringUtils.trimAllWhitespace(txtList.get(0).replace("manNum=","")));
+            int manSize=Integer.valueOf(StringUtils.trimAllWhitespace(txtList.get(0).replace("manNum=","")));//Remove the space to get the size of the number of men.
             int womanSize=Integer.valueOf(StringUtils.trimAllWhitespace(txtList.get(1).replace("womanNum=","")));
             for(int i=1;i<=manSize;i++){
                 manList.add(new Man(i));
@@ -55,16 +52,16 @@ public class EgsApplication {
             womanList=allwoman;
         }
 
-        for(Man man:manList){
+        for(Man man:manList){////Female preference list
             Woman[] preWoman=new Woman[womanList.size()];
             String preStr="man"+man.getCode()+"=";
             for(String txtStr:txtList){
-                if(txtStr.startsWith(preStr)){
-                    preStr=txtStr.replace(preStr,"");
+                if(txtStr.startsWith(preStr)){////Check whether the string starts with the specified prefix（preStr）.
+                    preStr=txtStr.replace(preStr,"");////Replace the prefix.
                     break;
                 }
             }
-            String[] preWomanCode=preStr.split(",");
+            String[] preWomanCode=preStr.split(",");////Use "," to split.
             for(int i=0;i<preWomanCode.length;i++){
                 preWoman[i]=getWomanInList(womanList,preWomanCode[i]);
             }
@@ -88,9 +85,9 @@ public class EgsApplication {
         allman= manList;
         allwoman=womanList;
     }
-    public Man getManInList(List<Man> manList,String manCode){
+    public Man getManInList(List<Man> manList,String manCode){//Get the male code from the list.
         for(Man man:manList){
-            if(man.getCode()==Integer.valueOf(manCode)){
+            if(man.getCode()==Integer.valueOf(manCode)){//If the codes are equal, the male is returned.
                 return man;
             }
         }
@@ -98,7 +95,7 @@ public class EgsApplication {
     }
     public Woman getWomanInList(List<Woman> womanList,String womanCode){
         for(Woman man:womanList){
-            if(man.getCode()==Integer.valueOf(womanCode)){
+            if(man.getCode()==Integer.valueOf(womanCode)){//If the codes are equal, the female is returned.
                 return man;
             }
         }
@@ -113,6 +110,16 @@ public class EgsApplication {
         }
         return null;
     }
+
+    //Match
+    public void match(Man man,Woman woman){
+//        System.out.println(man.getName()+"=========================="+woman.getName());
+        man.setPartner(woman);
+        man.setFreedom(false);
+        woman.setPartner(man);
+        woman.setFreedom(false);
+    }
+
     //Search for partners
     public void searchPartner(Man man){
         Woman firstWoman=man.getPreferWoman()[0];
@@ -158,17 +165,11 @@ public class EgsApplication {
         firstWoman.setPreferMan(newPreferMen);
     }
 
-    //Match
-    public void match(Man man,Woman woman){
-//        System.out.println(man.getName()+"=========================="+woman.getName());
-        man.setPartner(woman);
-        man.setFreedom(false);
-        woman.setPartner(man);
-        woman.setFreedom(false);
-    }
+
+
     public static void main(String[] args) {
         EgsApplication egsApplication=new EgsApplication();
-        egsApplication.init();
+        egsApplication.ReadFile();
         while (true){
             //Find single men
             Man freeMan=egsApplication.findFreedomMan();
@@ -180,7 +181,7 @@ public class EgsApplication {
                 break;
             }
         }
-        egsApplication.init();
+        egsApplication.ReadFile();
         CheckUtil.hasBlockMatch(egsApplication.allman);
         for(Man man:egsApplication.allman){
             System.out.println(man.getName()+"===========Marry=========="+man.getPartner().getName());

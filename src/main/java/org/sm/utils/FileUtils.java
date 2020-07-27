@@ -2,13 +2,8 @@ package org.sm.utils;
 
 import com.google.common.base.Joiner;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 
 /*
@@ -32,7 +27,8 @@ public class FileUtils {
 //    }
 
     public static void createTxt(int n){
-        int manNum = n;
+        //Create a TXT file to save the input data and the generated preference list.
+        int manNum = n;//The number of men and women.
         int womanNum = n;
         try {
             File writename = new File(filePath);// Create a relative path. if not, create a new output. txt file
@@ -41,30 +37,31 @@ public class FileUtils {
             }
 
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-            StringBuilder sb=new StringBuilder("manNum="+manNum);
-            sb.append("\r\n");
+            StringBuilder sb=new StringBuilder("manNum="+manNum);//Enter the number of men and women.
+            sb.append("\r\n");//Change the line.
             sb.append("womanNum="+womanNum);
-            sb.append("\r\n");
-            List<Integer> manList=new ArrayList<Integer>();
+            sb.append("\r\n");//Change the line.
+
+            List<Integer> manList=new ArrayList<Integer>();//Create a list of men. The size of the list is related to the input value N.
             for (int i =1;i<=manNum;i++){
                 manList.add(i);
             }
-            List<Integer> womanList=new ArrayList<Integer>();
+            List<Integer> womanList=new ArrayList<Integer>();//Create a list of women. The size of the list is related to the input value N.
             for (int i =1;i<=womanNum;i++){
                 womanList.add(i);
             }
-            for (int i =0;i<manList.size();i++){
+            for (int i =0;i<manList.size();i++){//Shuffle the order and get a random preference list.
                 Collections.shuffle(womanList);
                 sb.append("man"+manList.get(i)+"="+ Joiner.on(",").join(womanList));
                 sb.append("\r\n");
             }
-            Collections.sort(womanList);//rearrange
+            Collections.sort(womanList);//Shuffle the order and get a random preference list.
             for (int i =0;i<womanList.size();i++){
                 Collections.shuffle(manList);
                 sb.append("woman"+womanList.get(i)+"="+Joiner.on(",").join(manList));
-                sb.append("\r\n");
+                sb.append("\r\n");// \r\n means line break
             }
-            out.write(sb.toString()); // \r\n means line break
+            out.write(sb.toString());
             out.flush(); // Push the contents of the buffer into the file
             out.close();
 
