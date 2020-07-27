@@ -7,3 +7,5 @@ After testing, both algorithms can obtain stable matching results.
 
 
 26/07/2020，The function of detecting whether the input value is an integer is added to the FileUtils Class to ensure that the input value is an integer. If the input is not an integer, an exception will be thrown.
+
+27/07/2020，Add more code comments.
